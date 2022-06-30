@@ -91,11 +91,11 @@ namespace ft {
         };
 
         reverse_iterator rbegin() {
-            return reverse_iterator(_end_ptr);
+            return reverse_iterator(_end_ptr - 1);
         }
 
         reverse_iterator rend() {
-            return reverse_iterator(_end_ptr - _size);
+            return reverse_iterator(_end_ptr - _size - 1);
         }
 
         size_type max_size() const {

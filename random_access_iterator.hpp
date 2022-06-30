@@ -102,9 +102,9 @@ namespace ft {
         reverse_iterator& operator--() { this->_current += 1; return *this; };
         reverse_iterator operator--(int) { Iter tmp(*this); (*this)--; return tmp; };
         reverse_iterator& operator+=(difference_type n) { this->_current = this->_current - n; return *this; };
-        reverse_iterator operator+(difference_type n) const { Iter tmp = this->_current - n; return tmp; };
-        reverse_iterator& operator-=(difference_type n) { this->_current = this->_current + n; return *this; };
-        reverse_iterator operator-(difference_type n) const { Iter tmp = this->_current + n; return tmp; };
+        reverse_iterator operator+(difference_type n) const { reverse_iterator tmp = this->_current - n; return tmp; };
+        reverse_iterator& operator-=(difference_type const &n) { this->_current = this->_current + n; return *this; };
+        reverse_iterator operator-(difference_type const &n) const { reverse_iterator tmp = this->_current + n; return tmp; };
         reference operator[](difference_type n) const { return *(*this - n); };
         bool operator==(reverse_iterator const &it) { return this->_current== it._current;}
         bool operator!=(reverse_iterator const &it) { return !(this->_current == it._current);}

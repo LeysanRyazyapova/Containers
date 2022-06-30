@@ -62,7 +62,7 @@ int main(){
     std::cout << "---------STD--------" << "\n";
     std::vector<int> fourth(third);                       // a copy of third
     std::cout << "The contents of fourth are:";
-    for (std::vector<int>::iterator it = fourth.begin(); it != fourth.end() - 1; ++it)
+    for (std::vector<int>::reverse_iterator it = fourth.rbegin(); it != fourth.rend(); ++it)
         std::cout << ' ' << *it;
     std::cout << '\n';
     std::cout << "Capacity: " << fourth.capacity() << "\n";
@@ -72,7 +72,7 @@ int main(){
     std::cout << "---------MY--------" << "\n";
     ft::vector<int> fourth2(third2);                       // a copy of third
     std::cout << "The contents of fourth are:";
-    for (ft::vector<int>::iterator it = fourth2.begin(); it != fourth2.end() - 1; ++it)
+    for (ft::vector<int>::reverse_iterator it = fourth2.rbegin(); it != fourth2.rend() + 1; ++it)
         std::cout << ' ' << *it;
     std::cout << '\n';
     std::cout << "Capacity: " << fourth2.capacity() << "\n";
