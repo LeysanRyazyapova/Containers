@@ -87,7 +87,7 @@ namespace ft {
         };
 
         iterator end() const {
-            return begin() + size();
+            return iterator(_end_ptr);
         };
 
         reverse_iterator rbegin() {
