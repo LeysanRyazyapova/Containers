@@ -4,20 +4,71 @@
 #include "utils.hpp"
 int main(){
 
+/////Insert
 
-    std::cout << "---------STD--------" << "\n";
-    std::vector<int> first;
+    std::vector<int> v;
     std::vector<int> vector;
     vector.assign(1000, 1);
     vector.insert(vector.end() - 50, 4200 * 10000 , 2);
+    v.push_back(vector[2121]);
+    v.push_back(vector.size());
+    v.push_back(vector.capacity());
+    std::cout << "The contents of STD are:";
+    for (std::vector<int>::iterator iter = v.begin(); iter != v.end(); ++iter)
+        std::cout << ' ' << *iter;
+    std::cout << '\n';
+    std::cout << "Capacity: " << v.capacity() << "\n";
+    std::cout << "Size: " << v.size() << "\n";
+    std::cout << '\n';
 
-    std::cout << "The contents of second are:";
-    for (std::vector<int>::iterator it = second2.begin(); it != second2.end(); ++it)
-        std::cout << ' ' << *it;
+
+    ft::vector<int> v2;
+    ft::vector<int> vector2;
+    vector2.assign(1000, 1);
+    vector2.insert(vector2.end() - 50, 4200 * 10000 , 2);
+//    v2.push_back(765);
+    v2.push_back(vector2[2121]);
+    v2.push_back(vector2.size());
+    v2.push_back(vector2.capacity());
+    std::cout << "The contents of FT are:";
+    for (ft::vector<int>::iterator iter = v2.begin(); iter != v2.end(); ++iter)
+        std::cout << ' ' << *iter;
     std::cout << '\n';
-    std::cout << "Capacity: " << second2.capacity() << "\n";
-    std::cout << "Size: " << second2.size() << "\n";
+    std::cout << "Capacity: " << v2.capacity() << "\n";
+    std::cout << "Size: " << v2.size() << "\n";
     std::cout << '\n';
+
+//    std::cout << "---------STD--------" << "\n";
+//    std::vector<int> first;
+//    std::vector<int> vector;
+//    vector.assign(1000, 1);
+//    vector.insert(vector.end() - 50, 4200 * 10000 , 2);
+//    first.push_back(vector[2121]);
+//    first.push_back(vector.size());
+//    first.push_back(vector.capacity());
+//    std::cout << "The contents of second are:";
+//    for (std::vector<int>::iterator it = first.begin(); it != first.end(); ++it)
+//        std::cout << ' ' << *it;
+//    std::cout << '\n';
+//    std::cout << "Capacity: " << first.capacity() << "\n";
+//    std::cout << "Size: " << first.size() << "\n";
+//    std::cout << '\n';
+//
+//    std::cout << "---------FT--------" << "\n";
+//    ft::vector<int> first2;
+//    ft::vector<int> vector2;
+//    vector2.assign(1000, 1);
+//    vector2.insert(vector2.end() - 50, 4200 * 10000 , 2);
+//    first2.push_back(vector2[2121]);
+//    first2.push_back(vector2.size());
+//    first2.push_back(vector2.capacity());
+//    std::cout << "The contents of second are:";
+//    for (ft::vector<int>::iterator it = first2.begin(); it != first2.end(); ++it)
+//        std::cout << ' ' << *it;
+//    std::cout << '\n';
+//    std::cout << "Capacity: " << first2.capacity() << "\n";
+//    std::cout << "Size: " << first2.size() << "\n";
+//    std::cout << '\n';
 
 
 ////erase

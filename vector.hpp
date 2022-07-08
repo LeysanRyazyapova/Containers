@@ -36,7 +36,7 @@ namespace ft {
             _end_ptr = _alloc.allocate(n);
             pointer tmp_pointer = _end_ptr;
             for (size_t i = 0; i < n; i++) {
-                _alloc.construct(_end_ptr++, val);
+                _alloc.construct(tmp_pointer++, val);
             }
             _end_ptr = tmp_pointer;
         };
@@ -102,18 +102,19 @@ namespace ft {
             return std::numeric_limits<size_type>::max() / sizeof(ft::vector<T, Alloc>);
         };
 
-            void resize(size_type n, value_type val = value_type()) {
-                if(n > _size)
-                    insert(end(), n - _size, val);
-                if(n < _size)
-                    erase(iterator(end().getPtr() - (_size - n)), end());
-            };
+        void resize(size_type n, value_type val = value_type()) {
+            if(n > _size)
+                insert(end(), n - _size, val);
+            if(n < _size)
+                erase(iterator(end().getPtr() - (_size - n)), end());
+        };
         iterator insert(iterator position, const value_type &val) {
             pointer ptr = position.getPtr();
             if (_size + 1 > _capacity) {
                 difference_type offset = _end_ptr - ptr;
-                _capacity *= 2;
-                _reallocate(_capacity);
+                if(_capacity == 0)
+                    reserve(1);
+                reserve(_capacity * 2);
                 ptr = _end_ptr - offset;
             }
             std::memmove(ptr + 1, ptr, static_cast<size_t>(abs(_end_ptr - ptr)) * sizeof(value_type));
@@ -127,15 +128,12 @@ namespace ft {
             if (position < begin() || position > end())
                 throw std::out_of_range("Error! Incorrect position\n");
             pointer curPosPtr = position.getPtr();
-            if (_size + n > _capacity) {
+            if ((_size + n) > _capacity) {
                 difference_type offset = _end_ptr - curPosPtr;
                 if(_capacity == 0)
                     reserve(n);
-                else {
-                    while (_size + n > _capacity)
-                        reserve(2 * _capacity);
-
-                }
+                else
+                    reserve(_size + n);
                 curPosPtr = _end_ptr - offset;
             }
             std::memmove(curPosPtr + n, curPosPtr,
@@ -150,7 +148,7 @@ namespace ft {
         template<class InputIterator>
         void insert(iterator position, InputIterator first, InputIterator last,
                     typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = 0) {
-            for (; first != last; ++first) {
+            for (; first != last; first++) {
                 position = insert(position, *first);
                 ++position;
             }
@@ -176,12 +174,14 @@ namespace ft {
             if (n <= _capacity) return;
             pointer new_arr = _alloc.allocate(n);
             iterator it = begin();
-            for (size_type i = 0; i < _size; i++) {
+            size_type i = 0;
+            for (; i < _size; i++) {
                 _alloc.construct(new_arr++, *it++);
             }
             clear();
             _end_ptr = new_arr;
             _capacity = n;
+            _size = i;
         };
 
         size_type capacity() const {
