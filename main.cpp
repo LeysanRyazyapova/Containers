@@ -59,6 +59,7 @@ int main(){
     third2.push_back(3);
     third2.push_back(4);
 
+
     std::cout << "---------STD--------" << "\n";
     std::vector<int> fourth(third);                       // a copy of third
     std::cout << "The contents of fourth are:";
@@ -72,12 +73,36 @@ int main(){
     std::cout << "---------MY--------" << "\n";
     ft::vector<int> fourth2(third2);                       // a copy of third
     std::cout << "The contents of fourth are:";
-    for (ft::vector<int>::reverse_iterator it = fourth2.rbegin(); it != fourth2.rend() + 1; ++it)
+    for (ft::vector<int>::reverse_iterator it = fourth2.rbegin(); it != fourth2.rend(); ++it)
         std::cout << ' ' << *it;
     std::cout << '\n';
     std::cout << "Capacity: " << fourth2.capacity() << "\n";
     std::cout << "Size: " << fourth2.size() << "\n";
 
+    std::cout << "---------STD::REND--------" << "\n";
+    std::vector<int> fifth;
+    fifth.push_back(*(fourth.rend() - 1));
+    fifth.push_back(*(fourth.rend() - 2));
+    std::cout << "The contents of fifth are:";
+    for (std::vector<int>::reverse_iterator it = fifth.rbegin(); it != fifth.rend(); ++it)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
+    std::cout << "Capacity: " << fifth.capacity() << "\n";
+    std::cout << "Size: " << fifth.size() << "\n";
+
+    std::cout << "---------FT::REND--------" << "\n";
+    ft::vector<int> fifth2;
+    fifth2.push_back(*(fourth2.rend() - 1));
+    fifth2.push_back(*(fourth2.rend() - 2));
+    std::cout << "The contents of fifth are:";
+    for (ft::vector<int>::reverse_iterator it = fifth2.rbegin(); it != fifth2.rend(); ++it)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
+    std::cout << "Capacity: " << fifth2.capacity() << "\n";
+    std::cout << "Size: " << fifth2.size() << "\n";
+
+
+//    std::reverse_iterator<std::random_access_iterator_tag> t
 
 //    // the iterator constructor can also be used to construct from arrays:
 //    int myints[] = {16,2,77,29};

@@ -7,6 +7,7 @@
 #include "iterator_traits.hpp"
 #include <cstddef>
 #include <iostream>
+
 namespace ft {
     template<class Category, class T, class Dist = ptrdiff_t, class Pt = T*, class Rt = T&>
     struct iterator : public Category{
@@ -50,8 +51,8 @@ namespace ft {
         }
         RandomAccessIterator &operator--(){ this->_ptr -= 1; return *this;}
         RandomAccessIterator operator--(int) { RandomAccessIterator tmp(*this); (*this)--; return tmp;}
-        RandomAccessIterator operator+(difference_type const n) { this->_ptr += n; return *this;}
-        RandomAccessIterator operator-(difference_type const n) { this->_ptr -= n; return *this;}
+        RandomAccessIterator operator+(difference_type const n) const { return RandomAccessIterator(_ptr + n);}
+        RandomAccessIterator operator-(difference_type const &n) const { return RandomAccessIterator(_ptr - n);}
         RandomAccessIterator operator-(RandomAccessIterator const &it) { RandomAccessIterator tmp = this->_ptr - it._ptr; return *tmp;}
         bool operator==(RandomAccessIterator const &it) { return this->_ptr== it._ptr;}
         bool operator!=(RandomAccessIterator const &it) { return !(this->_ptr == it._ptr);}
@@ -63,7 +64,7 @@ namespace ft {
         RandomAccessIterator operator-=(difference_type const &n) { this->_ptr = this->_ptr - n; return (*this);};
         RandomAccessIterator operator[](difference_type n) { return *(*this + n);}
 
-        reference operator*() const { return *this->_ptr;}
+        reference operator*() const { pointer tmp = _ptr; return *tmp;}
         pointer operator->() const { return this->_ptr;}
 
         pointer getPtr() {
@@ -73,20 +74,24 @@ namespace ft {
         pointer _ptr;
     };
 
+
+    /////Old reverse
     template<class Iter>
     class reverse_iterator : public iterator<
-            typename Iter::iterator_category,
-            typename Iter::value_type,
-            typename Iter::difference_type,
-            typename Iter::pointer,
-            typename Iter::reference> {
+            typename ft::iterator_traits<Iter>::iterator_category,
+            typename ft::iterator_traits<Iter>::value_type,
+            typename ft::iterator_traits<Iter>::difference_type,
+            typename ft::iterator_traits<Iter>::pointer,
+            typename ft::iterator_traits<Iter>::reference> {
 
-        typedef typename Iter::difference_type difference_type;
-        typedef typename Iter::pointer pointer;
-        typedef typename Iter::reference reference;
+
 
     public:
         typedef  Iter iterator_type;
+        typedef typename ft::iterator_traits<Iter>::difference_type difference_type;
+        typedef typename ft::iterator_traits<Iter>::pointer pointer;
+        typedef typename ft::iterator_traits<Iter>::reference reference;
+
         reverse_iterator() : _current(nullptr) {};
         ~reverse_iterator(){};
         explicit reverse_iterator(Iter x) {
@@ -102,9 +107,9 @@ namespace ft {
         reverse_iterator& operator--() { this->_current += 1; return *this; };
         reverse_iterator operator--(int) { Iter tmp(*this); (*this)--; return tmp; };
         reverse_iterator& operator+=(difference_type n) { this->_current = this->_current - n; return *this; };
-        reverse_iterator operator+(difference_type n) const { reverse_iterator tmp = this->_current - n; return tmp; };
-        reverse_iterator& operator-=(difference_type const &n) { this->_current = this->_current + n; return *this; };
-        reverse_iterator operator-(difference_type const &n) const { reverse_iterator tmp = this->_current + n; return tmp; };
+        reverse_iterator operator+(difference_type const n) const { return reverse_iterator(_current - n); };
+        reverse_iterator& operator-=(difference_type const n) { this->_current = this->_current + n; return *this; };
+        reverse_iterator operator-(difference_type n) const { return reverse_iterator(_current + n); };
         reference operator[](difference_type n) const { return *(*this - n); };
         bool operator==(reverse_iterator const &it) { return this->_current== it._current;}
         bool operator!=(reverse_iterator const &it) { return !(this->_current == it._current);}
