@@ -102,10 +102,12 @@ namespace ft {
             return std::numeric_limits<size_type>::max() / sizeof(ft::vector<T, Alloc>);
         };
 
-//            void resize(size_type n, value_type val = value_type()) {
-//                if(n > _size)
-//                    if(n < _size)
-//            };
+            void resize(size_type n, value_type val = value_type()) {
+                if(n > _size)
+                    insert(end(), n - _size, val);
+                if(n < _size)
+                    erase(iterator(end().getPtr() - (_size - n)), end());
+            };
         iterator insert(iterator position, const value_type &val) {
             pointer ptr = position.getPtr();
             if (_size + 1 > _capacity) {

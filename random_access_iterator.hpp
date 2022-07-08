@@ -52,7 +52,7 @@ namespace ft {
         RandomAccessIterator &operator--(){ this->_ptr -= 1; return *this;}
         RandomAccessIterator operator--(int) { RandomAccessIterator tmp(*this); (*this)--; return tmp;}
         RandomAccessIterator operator+(difference_type const n) const { return RandomAccessIterator(_ptr + n);}
-        RandomAccessIterator operator-(difference_type const &n) const { return RandomAccessIterator(_ptr - n);}
+        RandomAccessIterator operator-(difference_type const n) const { return RandomAccessIterator(_ptr - n);}
         RandomAccessIterator operator-(RandomAccessIterator const &it) { RandomAccessIterator tmp = this->_ptr - it._ptr; return *tmp;}
         bool operator==(RandomAccessIterator const &it) { return this->_ptr== it._ptr;}
         bool operator!=(RandomAccessIterator const &it) { return !(this->_ptr == it._ptr);}
