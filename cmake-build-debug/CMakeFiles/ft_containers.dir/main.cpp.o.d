@@ -233,5 +233,5 @@ CMakeFiles/ft_containers.dir/main.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset \
   /Users/tmiranda/Containers/random_access_iterator.hpp \
-  /Users/tmiranda/Containers/iterator_traits.hpp \
+  /Users/tmiranda/Containers/iterators_traits.hpp \
   /Users/tmiranda/Containers/utils.hpp

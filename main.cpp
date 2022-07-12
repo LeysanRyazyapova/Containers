@@ -2,41 +2,155 @@
 #include "vector.hpp"
 #include <iostream>
 #include "utils.hpp"
+#include <map>
+#include "map.hpp"
+class B {
+public:
+    char *l;
+    int i;
+    B():l(nullptr), i(1) {};
+    B(const int &ex) {
+        this->i = ex;
+        this->l = new char('a');
+    };
+    virtual ~B() {
+        delete this->l;
+        this->l = nullptr;
+    };
+};
+
+class A : public B {
+public:
+    A():B(){};
+    A(const B* ex){
+        this->l = new char(*(ex->l));
+        this->i = ex->i;
+        if (ex->i == -1) throw "n";
+    }
+    ~A() {
+        delete this->l;
+        this->l = nullptr;
+    };
+};
 int main(){
 
+    std::vector<int> v;
+    ft::map<int, int> mp;
+
+    for (int i = 0, j = 10; i < 30 * 10000; ++i, ++j) {
+        mp.insert(ft::make_pair(i, j));
+    }
+    ft::map<int, int> mp2(mp.begin(), mp.end());
+
+    ft::map<int, int>::iterator it = mp2.begin();
+    for (int i = 0; i < 30 * 10000; ++i, it++) {
+        v.push_back(it->first);
+        v.push_back(it->second);
+    }
+    std::cout << "The contents of FT are:";
+    for (std::vector<int>::iterator it5 = v.begin(); it5 != v.end(); ++it5)
+        std::cout << ' ' << *it5;
+    std::cout << '\n';
+
+
+    std::vector<int> v3;
+    std::map<int, int> mp3;
+
+    for (int i = 0, j = 10; i < 30 * 10000; ++i, ++j) {
+        mp3.insert(std::make_pair(i, j));
+    }
+    std::map<int, int> mp23(mp3.begin(), mp3.end());
+
+    std::map<int, int>::iterator it3 = mp23.begin();
+    for (int i = 0; i < 30 * 10000; ++i, it++) {
+        v3.push_back(it3->first);
+        v3.push_back(it3->second);
+    }
+    std::cout << "The contents of STD are:";
+    for (std::vector<int>::iterator it5 = v3.begin(); it5 != v3.end(); ++it5)
+        std::cout << ' ' << *it5;
+    std::cout << '\n';
+
+
+
+
+//    std::vector<int> result, result_2;
+//    std::vector<int> v_int1, v_int2, v_int3;	ft::vector<int> V_int1, V_int2, V_int3;
+//    std::vector<std::string> v_str1, v_str2;			ft::vector<std::string> V_str1, V_str2;
+//    v_int1.push_back(1);						V_int1.push_back(1);
+//    v_int3.push_back(1);						V_int3.push_back(1);
+//    v_str1.push_back("aa");						V_str1.push_back("aa");
+//    v_str2.push_back("ab");						V_str2.push_back("ab");
+//    result.push_back(v_int1 == v_int2);			result_2.push_back(V_int1 == V_int2);
+//    v_int2.push_back(2);						V_int2.push_back(2);
+//    result.push_back(v_int1 == v_int2);			result_2.push_back(V_int1 == V_int2);
+//    result.push_back(v_int1 == v_int3);			result_2.push_back(V_int1 == V_int3);
+//    result.push_back(v_str1 == v_str2);			result_2.push_back(V_str1 == V_str2);
+//    bool res = result == result_2;
+//    std::cout << res;
 /////Insert
 
-    std::vector<int> v;
-    std::vector<int> vector;
-    vector.assign(1000, 1);
-    vector.insert(vector.end() - 50, 4200 * 10000 , 2);
-    v.push_back(vector[2121]);
+    std::cout << "---------FT--------" << "\n";
+    ft::vector<int> vector;
+    ft::vector<int> v;
+    ft::vector<int> tmp, tmp2;
+    vector.assign(3, 3);
+    tmp.assign(4000 * 10000, 1);
+    tmp2.assign(4 * 10000, 1);
+
+    vector.assign(tmp.begin(), tmp.end());
+    v.push_back(vector[1]);
     v.push_back(vector.size());
     v.push_back(vector.capacity());
-    std::cout << "The contents of STD are:";
-    for (std::vector<int>::iterator iter = v.begin(); iter != v.end(); ++iter)
-        std::cout << ' ' << *iter;
-    std::cout << '\n';
-    std::cout << "Capacity: " << v.capacity() << "\n";
-    std::cout << "Size: " << v.size() << "\n";
-    std::cout << '\n';
+    vector.assign(tmp2.begin(), tmp2.end());
+    v.push_back(vector[444]);
+    v.push_back(vector.size());
+    v.push_back(vector.capacity());
 
-
-    ft::vector<int> v2;
-    ft::vector<int> vector2;
-    vector2.assign(1000, 1);
-    vector2.insert(vector2.end() - 50, 4200 * 10000 , 2);
-//    v2.push_back(765);
-    v2.push_back(vector2[2121]);
-    v2.push_back(vector2.size());
-    v2.push_back(vector2.capacity());
     std::cout << "The contents of FT are:";
-    for (ft::vector<int>::iterator iter = v2.begin(); iter != v2.end(); ++iter)
-        std::cout << ' ' << *iter;
+    for (ft::vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+        std::cout << ' ' << *it;
     std::cout << '\n';
-    std::cout << "Capacity: " << v2.capacity() << "\n";
-    std::cout << "Size: " << v2.size() << "\n";
+
+    std::cout << "---------STD--------" << "\n";
+    std::vector<int> vector3;
+    std::vector<int> v3;
+    std::vector<int> tmp3, tmp23;
+    vector3.assign(3, 3);
+    tmp3.assign(4000 * 10000, 1);
+    tmp23.assign(4 * 10000, 1);
+    std::vector<int>::iterator iii;
+    iii.base();
+    vector.assign(tmp3.begin(), tmp3.end());
+    v3.push_back(vector3[1]);
+    v3.push_back(vector3.size());
+    v3.push_back(vector3.capacity());
+    vector3.assign(tmp23.begin(), tmp23.end());
+    v3.push_back(vector3[444]);
+    v3.push_back(vector3.size());
+    v3.push_back(vector3.capacity());
+
+    std::cout << "The contents of STD are:";
+    for (ft::vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+        std::cout << ' ' << *it;
     std::cout << '\n';
+
+    ft::vector<int>::const_iterator i(vector.begin());
+
+
+
+    std::cout << *i << std::endl;
+//    std::cout << "---------STD--------" << "\n";
+//    std::vector<int> vector2;
+//    std::vector<int> v2;
+//    vector2.assign(2600 * 10000, 1);
+//    v2.push_back(*(vector2.insert(vector2.end() - 800 * 10000, 44)));
+//    v2.push_back(vector2.size());
+//    v2.push_back(vector2.capacity());
+//    std::cout << "The contents of second are:";
+//    for (std::vector<int>::map_iterator it = v2.begin(); it != v2.end(); ++it)
+//        std::cout << ' ' << *it;
+//    std::cout << '\n';
 
 //    std::cout << "---------STD--------" << "\n";
 //    std::vector<int> first;
@@ -47,7 +161,7 @@ int main(){
 //    first.push_back(vector.size());
 //    first.push_back(vector.capacity());
 //    std::cout << "The contents of second are:";
-//    for (std::vector<int>::iterator it = first.begin(); it != first.end(); ++it)
+//    for (std::vector<int>::map_iterator it = first.begin(); it != first.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << first.capacity() << "\n";
@@ -63,7 +177,7 @@ int main(){
 //    first2.push_back(vector2.size());
 //    first2.push_back(vector2.capacity());
 //    std::cout << "The contents of second are:";
-//    for (ft::vector<int>::iterator it = first2.begin(); it != first2.end(); ++it)
+//    for (ft::vector<int>::map_iterator it = first2.begin(); it != first2.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << first2.capacity() << "\n";
@@ -82,7 +196,7 @@ int main(){
 //    first.push_back(vector.size());
 //    first.push_back(vector.capacity());
 //    std::cout << "The contents of first are:";
-//    for (std::vector<int>::iterator it = first.begin(); it != first.end(); ++it)
+//    for (std::vector<int>::map_iterator it = first.begin(); it != first.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << first.capacity() << "\n";
@@ -99,7 +213,7 @@ int main(){
 //    first2.push_back(vector2.size());
 //    first2.push_back(vector2.capacity());
 //    std::cout << "The contents of second are:";
-//    for (ft::vector<int>::iterator it = first2.begin(); it != first2.end(); ++it)
+//    for (ft::vector<int>::map_iterator it = first2.begin(); it != first2.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << first2.capacity() << "\n";
@@ -112,7 +226,7 @@ int main(){
 //    std::cout << "---------STD--------" << "\n";
 //    std::vector<int> second2(4,100);// four ints with value 100
 //    std::cout << "The contents of second are:";
-//    for (std::vector<int>::iterator it = second2.begin(); it != second2.end(); ++it)
+//    for (std::vector<int>::map_iterator it = second2.begin(); it != second2.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << second2.capacity() << "\n";
@@ -122,7 +236,7 @@ int main(){
 //    std::cout << "---------MY--------" << "\n";
 //    ft::vector<int> second(4,100);// four ints with value 100
 //    std::cout << "The contents of second are:";
-//    for (ft::vector<int>::iterator it = second.begin(); it != second.end(); ++it)
+//    for (ft::vector<int>::map_iterator it = second.begin(); it != second.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << second.capacity() << "\n";
@@ -132,7 +246,7 @@ int main(){
 //    std::cout << "---------STD--------" << "\n";
 //    std::vector<int> third(second2.begin(),second2.end());  // iterating through second
 //    std::cout << "The contents of third are:";
-//    for (std::vector<int>::iterator it = third.begin(); it != third.end(); ++it)
+//    for (std::vector<int>::map_iterator it = third.begin(); it != third.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << third.capacity() << "\n";
@@ -142,7 +256,7 @@ int main(){
 //    std::cout << "---------MY--------" << "\n";
 //    ft::vector<int> third2(second.begin(),second.end());  // iterating through second
 //    std::cout << "The contents of third are:";
-//    for (ft::vector<int>::iterator it = third2.begin(); it != third2.end(); ++it)
+//    for (ft::vector<int>::map_iterator it = third2.begin(); it != third2.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 //    std::cout << "Capacity: " << third2.capacity() << "\n";
@@ -205,28 +319,28 @@ int main(){
 
 //    std::reverse_iterator<std::random_access_iterator_tag> t
 
-//    // the iterator constructor can also be used to construct from arrays:
+//    // the map_iterator constructor can also be used to construct from arrays:
 //    int myints[] = {16,2,77,29};
 //    ft::vector<int> fifth(myints, myints + sizeof(myints) / sizeof(int) );
 //    std::cout << "The contents of fifth are:";
-//    for (ft::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
+//    for (ft::vector<int>::map_iterator it = fifth.begin(); it != fifth.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
 
 
 //////Insert
 //    std::vector<int> myvector (3,100);
-//    std::vector<int>::iterator it;
+//    std::vector<int>::map_iterator it;
 //
 //    it = myvector.end();
 //    it = myvector.insert ( it , 200 );
-//    for(std::vector<int>::iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
+//    for(std::vector<int>::map_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
 //        std::cout << *it2 << ' ';
 //    }
 //    std::cout << "\n";
 //
 //    myvector.insert (it,2,300);
-//    for(std::vector<int>::iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
+//    for(std::vector<int>::map_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
 //        std::cout << *it2 << ' ';
 //    }
 //    std::cout << "\n";
@@ -248,7 +362,7 @@ int main(){
 //    std::cout << std::endl;
 //    std::cout << std::endl;
 //    std::cout << std::endl;
-//    for(std::vector<int>::iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
+//    for(std::vector<int>::map_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
 //        std::cout << *it2 << ' ';
 //    }
 //    std::cout<< "\n original";
@@ -260,8 +374,8 @@ int main(){
 //    myvector.clear();
 //    std::cout << "Before reserve" << '\n';
 //    fifth.printVector();
-//    ft::vector<int>::iterator myit = fifth.begin();
-//    std::cout << "iterator: " << *myit << '\n';
+//    ft::vector<int>::map_iterator myit = fifth.begin();
+//    std::cout << "map_iterator: " << *myit << '\n';
 //    fifth.reserve(10);
 //    std::cout << "Fifth after" << '\n';
 //    fifth.printVector();

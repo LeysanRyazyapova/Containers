@@ -80,10 +80,25 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/tmiranda/Containers/Tree.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/tmiranda/Containers/bidirectional_iterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/tmiranda/Containers/insert_not_working.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/iterator_traits.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/tmiranda/Containers/map.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/tmiranda/Containers/map_iterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/random_access_iterator.hpp">
