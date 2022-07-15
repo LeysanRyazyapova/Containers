@@ -113,10 +113,12 @@ namespace ft {
 
         const_reverse_iterator rend() const {
             return const_reverse_iterator(_end_ptr - _size - 1);
-        }
+        };
 
         size_type max_size() const {
-            return std::numeric_limits<size_type>::max() / sizeof(ft::vector<T, Alloc>);
+            return _alloc.max_size();
+//            return std::numeric_limits<size_type>::max() / sizeof(ft::vector<T, Alloc>);
+
         };
 
         void resize(size_type n, value_type val = value_type()) {

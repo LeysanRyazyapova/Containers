@@ -96,8 +96,9 @@ namespace ft {
         Iter base() const {return this->_current - 1;};
         reference operator*() const { return *this->_current; };
         pointer operator->() const { return this->_current; };
+
         reverse_iterator& operator++() { this->_current -= 1; return *this; };
-        reverse_iterator operator++(int) { Iter tmp(*this); (*this)++; return tmp; };
+        reverse_iterator operator++(int) { reverse_iterator tmp = *this; this->operator++(); return tmp; };
         reverse_iterator& operator--() { this->_current += 1; return *this; };
         reverse_iterator operator--(int) { Iter tmp(*this); (*this)--; return tmp; };
         reverse_iterator& operator+=(difference_type n) { this->_current = this->_current - n; return *this; };

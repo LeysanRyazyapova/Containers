@@ -80,9 +80,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/tmiranda/Containers/Tree.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/bidirectional_iterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
@@ -95,6 +92,9 @@
 		<Unit filename="/Users/tmiranda/Containers/main.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/tmiranda/Containers/main1.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
@@ -102,6 +102,9 @@
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/random_access_iterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/tmiranda/Containers/tree.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/tmiranda/Containers/utils.hpp">

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ft_containers.dir/main.cpp.o"
   "CMakeFiles/ft_containers.dir/main.cpp.o.d"
+  "CMakeFiles/ft_containers.dir/main1.cpp.o"
+  "CMakeFiles/ft_containers.dir/main1.cpp.o.d"
   "ft_containers"
   "ft_containers.pdb"
 )

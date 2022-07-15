@@ -18,12 +18,12 @@ namespace ft {
         size_type size() const { return _ctnr.size();};
         value_type& top() {return _ctnr.back();};
         const value_type& top() const { return _ctnr.back();};
-        void push(const value_type& val) { _ctnr.push_back();};
+        void push(const value_type& val) { _ctnr.push_back(val);};
         void pop() {_ctnr.pop_back;};
     private:
         container_type _ctnr;
         template <class U, class Cont>
-        friend bool operator==(const ft::stack<U,Cont>& lhs, const ft::stack<U,Cont>& rhs;
+        friend bool operator==(const ft::stack<U,Cont>& lhs, const ft::stack<U,Cont>& rhs);
         template <class U, class Cont>
         friend bool operator!=(const ft::stack<U,Cont>& lhs, const ft::stack<U,Cont>& rhs);
         template <class U, class Cont>
