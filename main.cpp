@@ -151,7 +151,7 @@
 ////    v2.push_back(vector2.size());
 ////    v2.push_back(vector2.capacity());
 ////    std::cout << "The contents of second are:";
-////    for (std::vector<int>::bidirectional_iterator it = v2.begin(); it != v2.end(); ++it)
+////    for (std::vector<int>::tree_iterator it = v2.begin(); it != v2.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 //
@@ -164,7 +164,7 @@
 ////    first.push_back(vector.size());
 ////    first.push_back(vector.capacity());
 ////    std::cout << "The contents of second are:";
-////    for (std::vector<int>::bidirectional_iterator it = first.begin(); it != first.end(); ++it)
+////    for (std::vector<int>::tree_iterator it = first.begin(); it != first.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << first.capacity() << "\n";
@@ -180,7 +180,7 @@
 ////    first2.push_back(vector2.size());
 ////    first2.push_back(vector2.capacity());
 ////    std::cout << "The contents of second are:";
-////    for (ft::vector<int>::bidirectional_iterator it = first2.begin(); it != first2.end(); ++it)
+////    for (ft::vector<int>::tree_iterator it = first2.begin(); it != first2.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << first2.capacity() << "\n";
@@ -199,7 +199,7 @@
 ////    first.push_back(vector.size());
 ////    first.push_back(vector.capacity());
 ////    std::cout << "The contents of first are:";
-////    for (std::vector<int>::bidirectional_iterator it = first.begin(); it != first.end(); ++it)
+////    for (std::vector<int>::tree_iterator it = first.begin(); it != first.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << first.capacity() << "\n";
@@ -216,7 +216,7 @@
 ////    first2.push_back(vector2.size());
 ////    first2.push_back(vector2.capacity());
 ////    std::cout << "The contents of second are:";
-////    for (ft::vector<int>::bidirectional_iterator it = first2.begin(); it != first2.end(); ++it)
+////    for (ft::vector<int>::tree_iterator it = first2.begin(); it != first2.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << first2.capacity() << "\n";
@@ -229,7 +229,7 @@
 ////    std::cout << "---------STD--------" << "\n";
 ////    std::vector<int> second2(4,100);// four ints with value 100
 ////    std::cout << "The contents of second are:";
-////    for (std::vector<int>::bidirectional_iterator it = second2.begin(); it != second2.end(); ++it)
+////    for (std::vector<int>::tree_iterator it = second2.begin(); it != second2.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << second2.capacity() << "\n";
@@ -239,7 +239,7 @@
 ////    std::cout << "---------MY--------" << "\n";
 ////    ft::vector<int> second(4,100);// four ints with value 100
 ////    std::cout << "The contents of second are:";
-////    for (ft::vector<int>::bidirectional_iterator it = second.begin(); it != second.end(); ++it)
+////    for (ft::vector<int>::tree_iterator it = second.begin(); it != second.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << second.capacity() << "\n";
@@ -249,7 +249,7 @@
 ////    std::cout << "---------STD--------" << "\n";
 ////    std::vector<int> third(second2.begin(),second2.end());  // iterating through second
 ////    std::cout << "The contents of third are:";
-////    for (std::vector<int>::bidirectional_iterator it = third.begin(); it != third.end(); ++it)
+////    for (std::vector<int>::tree_iterator it = third.begin(); it != third.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << third.capacity() << "\n";
@@ -259,7 +259,7 @@
 ////    std::cout << "---------MY--------" << "\n";
 ////    ft::vector<int> third2(second.begin(),second.end());  // iterating through second
 ////    std::cout << "The contents of third are:";
-////    for (ft::vector<int>::bidirectional_iterator it = third2.begin(); it != third2.end(); ++it)
+////    for (ft::vector<int>::tree_iterator it = third2.begin(); it != third2.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 ////    std::cout << "Capacity: " << third2.capacity() << "\n";
@@ -322,28 +322,28 @@
 //
 ////    std::reverse_iterator<std::random_access_iterator_tag> t
 //
-////    // the bidirectional_iterator constructor can also be used to construct from arrays:
+////    // the tree_iterator constructor can also be used to construct from arrays:
 ////    int myints[] = {16,2,77,29};
 ////    ft::vector<int> fifth(myints, myints + sizeof(myints) / sizeof(int) );
 ////    std::cout << "The contents of fifth are:";
-////    for (ft::vector<int>::bidirectional_iterator it = fifth.begin(); it != fifth.end(); ++it)
+////    for (ft::vector<int>::tree_iterator it = fifth.begin(); it != fifth.end(); ++it)
 ////        std::cout << ' ' << *it;
 ////    std::cout << '\n';
 //
 //
 ////////Insert
 ////    std::vector<int> myvector (3,100);
-////    std::vector<int>::bidirectional_iterator it;
+////    std::vector<int>::tree_iterator it;
 ////
 ////    it = myvector.end();
 ////    it = myvector.insert ( it , 200 );
-////    for(std::vector<int>::bidirectional_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
+////    for(std::vector<int>::tree_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
 ////        std::cout << *it2 << ' ';
 ////    }
 ////    std::cout << "\n";
 ////
 ////    myvector.insert (it,2,300);
-////    for(std::vector<int>::bidirectional_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
+////    for(std::vector<int>::tree_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
 ////        std::cout << *it2 << ' ';
 ////    }
 ////    std::cout << "\n";
@@ -365,7 +365,7 @@
 ////    std::cout << std::endl;
 ////    std::cout << std::endl;
 ////    std::cout << std::endl;
-////    for(std::vector<int>::bidirectional_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
+////    for(std::vector<int>::tree_iterator it2 = myvector.begin(); it2 != myvector.end(); it2++) {
 ////        std::cout << *it2 << ' ';
 ////    }
 ////    std::cout<< "\n original";
@@ -377,8 +377,8 @@
 ////    myvector.clear();
 ////    std::cout << "Before reserve" << '\n';
 ////    fifth.printVector();
-////    ft::vector<int>::bidirectional_iterator myit = fifth.begin();
-////    std::cout << "bidirectional_iterator: " << *myit << '\n';
+////    ft::vector<int>::tree_iterator myit = fifth.begin();
+////    std::cout << "tree_iterator: " << *myit << '\n';
 ////    fifth.reserve(10);
 ////    std::cout << "Fifth after" << '\n';
 ////    fifth.printVector();

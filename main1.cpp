@@ -144,7 +144,7 @@ int main() {
 
     ///***FT**///
 
-    std::map<char,int> map12;
+    ft::map<char,int> map12;
 
     map12['a']=10;
     map12['b']=30;
