@@ -103,7 +103,7 @@ namespace ft{
     };
 
     template<class value_type>
-    class const_tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, value_type const> {
+    class const_tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, const value_type> {
 
         typedef s_node<value_type> node;
     public:
@@ -111,7 +111,7 @@ namespace ft{
         ~const_tree_iterator() {}
 
         const_tree_iterator(const_tree_iterator const & it ) { *this = it; }
-        const_tree_iterator(tree_iterator<value_type> const & it ) { *this = it; }
+        const_tree_iterator(tree_iterator<const value_type> const & it ) { *this = it; }
         const_tree_iterator(node *ptr ) { this->_ptr = ptr; }
 
         const_tree_iterator & operator=(const_tree_iterator const & rhs ) {
@@ -265,7 +265,7 @@ namespace ft{
     };
 
     template <class value_type>
-    class const_reverse_iterator : public ft::reverse_iterator<const_tree_iterator<value_type> > {
+    class const_reverse_iterator : public ft::reverse_iterator<tree_iterator<value_type> > {
 
         typedef s_node<value_type> node;
     public:

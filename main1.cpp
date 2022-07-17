@@ -126,6 +126,9 @@ int main() {
 
     std::map<char,int> map1;
 
+    std::less<int> k;
+
+    k(4, 5);
     map1['a']=10;
     map1['b']=30;
     map1['c']=50;
@@ -146,20 +149,22 @@ int main() {
 
     ft::map<char,int> map12;
 
-    map12['a']=10;
+    map12['a'] = 10;
     map12['b']=30;
     map12['c']=50;
     map12['d']=70;
 
-    ft::map<char,int> map22 (map12.begin(),map12.end());
+    printMap(map12);
 
-    ft::map<char,int> map32 (map22);
-
-    ft::map<char,int,classcomp> map42;                 // class as Compare
-
-    ft::map<char,int,bool(*)(char,char)> map52 (fn_pt);
-
-    printMap(map22);
+//    ft::map<char,int> map22 (map12.begin(),map12.end());
+//
+//    ft::map<char,int> map32 (map22);
+//
+//    ft::map<char,int,classcomp> map42;                 // class as Compare
+//
+//    ft::map<char,int,bool(*)(char,char)> map52 (fn_pt);
+//
+//    printMap(map22);
 
     return 0;
 }

@@ -30,28 +30,29 @@ namespace ft {
         typedef const value_type *const_pointer;
         typedef ptrdiff_t difference_type;
         typedef size_t size_type;
+
+
+//        class value_compare : public std::binary_function<value_type, value_type, bool> {
+//        public:
+//            Compare comp;
+//
+//            value_compare(const Compare &c) : comp(c) {}  // constructed with map's comparison object
+//        public:
+////            typedef bool result_type;
+////            typedef value_type first_argument_type;
+////            typedef value_type second_argument_type;
+//
+//
+//            bool operator()(const value_type &x, const value_type &y) const {
+//                return comp(x.first, y.first);
+//            }
+//        };
+
         typedef ft::tree_iterator<value_type> iterator;
-        typedef ft::tree_iterator<value_type> const_iterator;
+        typedef ft::const_tree_iterator<value_type> const_iterator;
         typedef ft::tree_reverse_iterator<value_type> reverse_iterator;
-        typedef ft::tree_reverse_iterator<value_type> const_reverse_iterator;
-        typedef typename ft::tree<value_type> tree_type;
-
-        class value_compare : public std::binary_function<value_type, value_type, bool> {
-        public:
-            Compare comp;
-
-            value_compare(const Compare &c) : comp(c) {}  // constructed with map's comparison object
-        public:
-            typedef bool result_type;
-            typedef value_type first_argument_type;
-            typedef value_type second_argument_type;
-
-
-            bool operator()(const value_type &x, const value_type &y) const {
-                return comp(x.first, y.first);
-            }
-        };
-
+        typedef ft::const_reverse_iterator<value_type> const_reverse_iterator;
+        typedef typename ft::tree<value_type, key_compare, allocator_type> tree_type;
         explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
                  _alloc(alloc), _tree(tree_type(comp, alloc)), _compare(comp) {}
 
@@ -63,9 +64,7 @@ namespace ft {
             (void)alloc;
         }
 
-        map(const map &x)  {
-            _tree = tree<value_type >(x.begin(), x.end());
-        }
+        map(const map &x) : _tree(tree_type(x.begin(), x.end())) {}
 
         /*** DESTRUCTION ***/
 
@@ -75,6 +74,8 @@ namespace ft {
 
         iterator begin() { return _tree.begin(); }
         iterator end() { return _tree.end(); }
+        const_iterator begin() const { return _tree.begin(); }
+        const_iterator end() const { return _tree.end(); };
 
 //        size_t erase (const key_type& k) {
 //            iterator pos = find(k);
@@ -86,7 +87,7 @@ namespace ft {
 //        }
 
         mapped_type& operator[] (const key_type& k) {
-            return (*((_tree.insert(make_pair(k,mapped_type()))).first)).second;
+            return (*(( _tree.insert(ft::make_pair<const Key, T>(k,T())) ).first)).second;
         }
 
     private:

@@ -1,6 +1,7 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 #include "tree_iterator.hpp"
+#include "map.hpp"
 namespace ft {
 
     template<class Value, class Compare = std::less<Value>, class Alloc = std::allocator<Value> >
@@ -11,9 +12,9 @@ namespace ft {
         typedef Alloc allocator_type;
         typedef typename allocator_type::template rebind<node>::other allocator_rebind;
         typedef typename ft::tree_iterator<Value>			iterator;
-        typedef typename ft::tree_iterator<const Value>	const_iterator;
-        typedef	ft::tree_reverse_iterator<iterator> reverse_iterator;
-        typedef	ft::tree_reverse_iterator<const_iterator> const_reverse_iterator;
+        typedef typename ft::const_tree_iterator<Value>	const_iterator;
+        typedef	ft::tree_reverse_iterator<Value> reverse_iterator;
+        typedef	ft::const_reverse_iterator<Value> const_reverse_iterator;
         typedef Compare key_compare;
 
 
@@ -29,6 +30,11 @@ namespace ft {
         static const bool	_color_red = true;
 
     public:
+//        tree() : _alloc_rebind(allocator_rebind()), _alloc(allocator_type()), _comp(key_compare()), _root(nullptr), _size(0){
+//            _begin_node = _createEmptyNode();
+//            _end_node = _createEmptyNode();
+//        }
+
         tree(const Compare &comp, const allocator_type& a = allocator_type()):_alloc(a), _comp(comp), _root(0), _size(0) {
             _begin_node = _createEmptyNode();
             _end_node = _createEmptyNode();
@@ -67,6 +73,8 @@ namespace ft {
 
         iterator begin() { return _size != 0 ? ++iterator(_begin_node) : iterator(_end_node); }
         iterator end() { return iterator(_end_node); }
+        const_iterator begin() const { return _size != 0 ? ++const_iterator(_begin_node) : const_iterator(_end_node); }
+        const_iterator end() const { return const_iterator(_end_node); };
 
         ft::pair<iterator,bool> insert (const value_type& val) {
             ft::pair<node*, bool> ret;
@@ -76,6 +84,20 @@ namespace ft {
                 _size += 1;
             return ft::make_pair(iterator(ret.first), ret.second);
         }
+
+        iterator insert (iterator position, const value_type& val) {
+            static_cast<void>(position);
+            return insert(val).first;
+        }
+
+        template <class InputIterator>
+        void insert (InputIterator first, InputIterator last,
+                     typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = 0) {
+            for ( ; first != last; ++first) {
+                insert(*first);
+            }
+        }
+
         node *_createEmptyNode() {
             node *newNode = _alloc_rebind.allocate(1);
             newNode->color = _color_black;
@@ -103,47 +125,47 @@ namespace ft {
 //            _alloc_rebind.deallocate(ptr, 1);
 //        }
 
-//        bool _isRed(node *h) {
-//            if (h == nullptr)
-//                return _color_black;
-//            return h->color == _color_red;
-//        }
+        bool _isRed(node *h) {
+            if (h == nullptr)
+                return _color_black;
+            return h->color == _color_red;
+        }
 
-//        node *_rotateLeft(node *h) {
-//            h->right->parent = h->parent;
-//            h->parent = h->right;
-//            if (h->right->left) h->right->left->parent = h;
-//            node *tmp = h->right->left;
-//            h->right->left = h;
-//            h->right = tmp;
-//            h->parent->color = h->color;
-//            h->color = _color_red;
-//            if (h == _root)
-//                _root = h->parent;
-//            return h->parent;
-//        }
+        node *_rotateLeft(node *h) {
+            h->right->parent = h->parent;
+            h->parent = h->right;
+            if (h->right->left) h->right->left->parent = h;
+            node *tmp = h->right->left;
+            h->right->left = h;
+            h->right = tmp;
+            h->parent->color = h->color;
+            h->color = _color_red;
+            if (h == _root)
+                _root = h->parent;
+            return h->parent;
+        }
 
-//        node *_rotateRight(node *h) {
-//            h->left->parent = h->parent;
-//            h->parent = h->left;
-//            if (h->left->right) h->left->right->parent = h;
-//            node *tmp = h->left->right;
-//            h->left->right = h;
-//            h->left = tmp;
-//            h->parent->color = h->color;
-//            h->color = _color_red;
-//            if (h == _root)
-//                _root = h->parent;
-//            return h->parent;
-//        }
+        node *_rotateRight(node *h) {
+            h->left->parent = h->parent;
+            h->parent = h->left;
+            if (h->left->right) h->left->right->parent = h;
+            node *tmp = h->left->right;
+            h->left->right = h;
+            h->left = tmp;
+            h->parent->color = h->color;
+            h->color = _color_red;
+            if (h == _root)
+                _root = h->parent;
+            return h->parent;
+        }
 
-//        void _invertColors(node *h) {
-//            if (h->right)
-//                h->right->color = !h->right->color;
-//            if (h->left)
-//                h->left->color = !h->left->color;
-//            h->color = !h->color;
-//        }
+        void _invertColors(node *h) {
+            if (h->right)
+                h->right->color = !h->right->color;
+            if (h->left)
+                h->left->color = !h->left->color;
+            h->color = !h->color;
+        }
 
 //        node *_moveRedLeft(node *h) {
 //            _invertColors(h);
@@ -170,17 +192,17 @@ namespace ft {
 //            return _getMinNode(h->left);
 //        }
 
-//        node *_fixUp(node *h) {
-//            if (h->right && _isRed(h->right))
-//                h = _rotateLeft(h);
-//            if (h->left && h->left->left && _isRed(h->left) && _isRed(h->left->left))
-//                h = _rotateRight(h);
-//            if (h->left && h->right && _isRed(h->left) && _isRed(h->right))
-//                _invertColors(h);
-//            if (h == _root && _root->color == _color_red)
-//                _root->color = _color_black;
-//            return h;
-//        }
+        node *_fixUp(node *h) {
+            if (h->right && _isRed(h->right))
+                h = _rotateLeft(h);
+            if (h->left && h->left->left && _isRed(h->left) && _isRed(h->left->left))
+                h = _rotateRight(h);
+            if (h->left && h->right && _isRed(h->left) && _isRed(h->right))
+                _invertColors(h);
+            if (h == _root && _root->color == _color_red)
+                _root->color = _color_black;
+            return h;
+        }
 
         ft::pair<node *, bool> _treeInsert(node **h, const value_type &val) {
             node *tmp;
