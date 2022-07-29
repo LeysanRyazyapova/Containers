@@ -128,6 +128,7 @@ int main() {
 
     std::less<int> k;
 
+
     k(4, 5);
     map1['a']=10;
     map1['b']=30;
@@ -145,6 +146,7 @@ int main() {
 
     printSTDMap(map2);
 
+
     ///***FT**///
 
     ft::map<char,int> map12;
@@ -154,17 +156,16 @@ int main() {
     map12['c']=50;
     map12['d']=70;
 
-    printMap(map12);
 
-//    ft::map<char,int> map22 (map12.begin(),map12.end());
-//
-//    ft::map<char,int> map32 (map22);
-//
-//    ft::map<char,int,classcomp> map42;                 // class as Compare
-//
-//    ft::map<char,int,bool(*)(char,char)> map52 (fn_pt);
-//
-//    printMap(map22);
+    ft::map<char,int> map22 (map12.begin(),map12.end());
+
+    ft::map<char,int> map32 (map22);
+
+    ft::map<char,int,classcomp> map42;                 // class as Compare
+
+    ft::map<char,int,bool(*)(char,char)> map52 (fn_pt);
+
+    printMap(map22);
 
     return 0;
 }
@@ -184,6 +185,7 @@ void printVector(ft::vector<T> v){
 }
 template<class Key, class Value>
 void printSTDMap(std::map<Key, Value> m) {
+    std::cout << "STD MAP" << std::endl;
     for (typename std::map<Key,Value>::iterator it=m.begin(); it!=m.end(); ++it)
         std::cout << it->first << " => " << it->second << '\n';
     std::cout << '\n';
@@ -191,6 +193,7 @@ void printSTDMap(std::map<Key, Value> m) {
 }
 template<class Key, class Value>
 void printMap(ft::map<Key, Value> m) {
+    std::cout << "FT MAP" << std::endl;
     for (typename ft::map<Key,Value>::iterator it=m.begin(); it!=m.end(); ++it)
         std::cout << it->first << " => " << it->second << '\n';
     std::cout << '\n';

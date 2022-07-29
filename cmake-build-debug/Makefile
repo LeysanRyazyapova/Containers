@@ -177,6 +177,30 @@ main1.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/main1.cpp.s
 .PHONY : main1.cpp.s
 
+tmp.o: tmp.cpp.o
+.PHONY : tmp.o
+
+# target to build an object file
+tmp.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/tmp.cpp.o
+.PHONY : tmp.cpp.o
+
+tmp.i: tmp.cpp.i
+.PHONY : tmp.i
+
+# target to preprocess a source file
+tmp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/tmp.cpp.i
+.PHONY : tmp.cpp.i
+
+tmp.s: tmp.cpp.s
+.PHONY : tmp.s
+
+# target to generate assembly for a file
+tmp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/tmp.cpp.s
+.PHONY : tmp.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +216,9 @@ help:
 	@echo "... main1.o"
 	@echo "... main1.i"
 	@echo "... main1.s"
+	@echo "... tmp.o"
+	@echo "... tmp.i"
+	@echo "... tmp.s"
 .PHONY : help
 
 
