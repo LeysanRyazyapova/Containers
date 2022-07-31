@@ -39,11 +39,6 @@ namespace ft {
 
             value_compare(const Compare &c) : comp(c) {}  // constructed with map's comparison object
         public:
-//            typedef bool result_type;
-//            typedef value_type first_argument_type;
-//            typedef value_type second_argument_type;
-
-
             bool operator()(const value_type &x, const value_type &y) const {
                 return comp(x.first, y.first);
             }
@@ -55,6 +50,7 @@ namespace ft {
         typedef ft::const_reverse_iterator<value_type> const_reverse_iterator;
         typedef typename ft::tree<value_type, key_compare, allocator_type> tree_type;
         typedef value_compare vc;
+        typedef ft::s_node<value_type> node;
 
         explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
                  _alloc(alloc), _tree(tree_type(comp, alloc)), _compare(comp) {}
@@ -79,14 +75,53 @@ namespace ft {
         const_iterator begin() const { return _tree.begin(); }
         const_iterator end() const { return _tree.end(); };
 
-//        size_t erase (const key_type& k) {
-//            iterator pos = find(k);
-//            if ( pos == this->end() ) {
-//                return (0);
-//            }
-//            _tree.erase(pos);
-//            return (1);
-//        }
+
+
+        ft::pair<iterator,bool> insert(const value_type& val){
+            return _tree.insert(val);
+        };
+
+        iterator insert(iterator position, const value_type& val){
+            return _tree.insert(position, val);
+        };
+
+
+        size_type erase(const key_type& k) {
+            value_type val = ft::make_pair<const key_type, mapped_type>(k, mapped_type());
+            size_type ret = _tree.erase(_tree.getRoot(), val);
+            return ret;
+        }
+
+        void erase (iterator position) {
+            erase(position->first);
+        }
+
+        void erase(iterator first, iterator last) {
+            iterator next;
+            while (first != last)
+            {
+                next = first;
+                ++next;
+                erase(first);
+                first = next;
+            }
+
+        }
+
+        iterator find (const key_type& k) {
+            value_type val = ft::make_pair<const key_type, mapped_type>(k, mapped_type());
+            node *toFind = _tree.search(_tree.getRoot(), val);
+            if (toFind == nullptr)
+                return iterator(_tree.getEndNode());
+            return iterator(toFind);
+        }
+        const_iterator find (const key_type& k) const {
+            value_type val = ft::make_pair<const key_type, mapped_type>(k, mapped_type());
+            node *toFind = _treeSearch(_tree.getRoot(), val);
+            if (toFind == nullptr)
+                return const_iterator(_tree.getEndNode());
+            return const_iterator(toFind);
+        }
 
         mapped_type& operator[] (const key_type& k) {
             return (*((_tree.insert(ft::make_pair(k,mapped_type()))).first)).second;
